@@ -15,7 +15,6 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jurin_n.jax_rs.representation.PracticeMenuRepresentation;
 
 public class JsonMarshallerTest {
 
@@ -23,14 +22,14 @@ public class JsonMarshallerTest {
 	public TemporaryFolder tempFolder = new TemporaryFolder();
 
 	private JsonMarshaller sut;
-	private PracticeMenuRepresentation json;
-	private PracticeMenuRepresentation json2;
+	private TestRepresentation json;
+	private TestRepresentation json2;
 	
 	@Before
 	public void setUp(){
 		sut = new JsonMarshaller();
-		json = new PracticeMenuRepresentation("id001","メニュー");
-		json2 = new PracticeMenuRepresentation("id001",null);
+		json = new TestRepresentation("id001","メニュー");
+		json2 = new TestRepresentation("id001",null);
 	}
 	
 	@Test
@@ -42,7 +41,7 @@ public class JsonMarshallerTest {
 	public void test_getSize_マイナス１返却される() {
 		long result = sut.getSize(
 				  json
-				, PracticeMenuRepresentation.class
+				, TestRepresentation.class
 				, null
 				, null
 				, null);
@@ -75,8 +74,8 @@ public class JsonMarshallerTest {
 			
 			//json読み込み
 			ObjectMapper mapper = new ObjectMapper();
-			PracticeMenuRepresentation jsonMarshal
-					= mapper.readValue(file,PracticeMenuRepresentation.class);
+			TestRepresentation jsonMarshal
+					= mapper.readValue(file,TestRepresentation.class);
 			
 			//検証
 			assertThat(jsonMarshal.getId(),is(json.getId()));
@@ -95,8 +94,8 @@ public class JsonMarshallerTest {
 			
 			//json読み込み
 			ObjectMapper mapper2 = new ObjectMapper();
-			PracticeMenuRepresentation jsonMarshal2
-					= mapper2.readValue(file2,PracticeMenuRepresentation.class);
+			TestRepresentation jsonMarshal2
+					= mapper2.readValue(file2,TestRepresentation.class);
 			
 			//検証
 			assertThat(jsonMarshal2.getId(),is(json2.getId()));

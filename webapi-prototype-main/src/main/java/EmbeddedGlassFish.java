@@ -102,8 +102,8 @@ public class EmbeddedGlassFish {
 			  Deployer deployer = glassfish.getDeployer();
 			  
 				deployer.deploy(
-						    new File("./target/jax-rs-1_0-prototype2.war")
-						  , "--name=jax-rs-1_0-prototype2"
+						    new File("./target/webapi-prototype-main.war")
+						  , "--name=webapi-prototype-main"
 						  , "--contextroot=/"
 						  , "--force=true");
 			} catch (GlassFishException e) {

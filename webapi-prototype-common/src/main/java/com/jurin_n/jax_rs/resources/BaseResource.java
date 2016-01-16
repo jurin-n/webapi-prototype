@@ -3,7 +3,6 @@ package com.jurin_n.jax_rs.resources;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
@@ -21,7 +20,6 @@ import com.jurin_n.domain.model.identity.user.UserDescriptor;
 class BaseResource {
 	@Context private HttpHeaders headers;
 	@Inject private AuthenticationService authService;
-	//@EJB private AuthenticationService authService;
 	private UserDescriptor userDescriptor;
 	private Authentications selectedAuthentication = Authentications.Sha1Authentication;
 	private Authentication authLogic;

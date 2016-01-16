@@ -12,7 +12,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.StreamingOutput;
 
 @Path("/download")
-public class download {
+public class Download {
 	@GET
 	@Produces("application/zip")
 	public StreamingOutput get(){

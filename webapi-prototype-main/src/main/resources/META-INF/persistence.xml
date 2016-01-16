@@ -2,11 +2,11 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="webapi-prototype-main">
 		<jta-data-source>jdbc/db1</jta-data-source>
-		<!-- <jar-file>../../lib/webapi-prototype-common-1.0.jar</jar-file> -->
+		<jar-file>lib/webapi-prototype-common-1.0.jar</jar-file>
 		<!-- <exclude-unlisted-classes>false</exclude-unlisted-classes> -->
 		<!-- <class>com.jurin_n.domain.model.identity.permission.Permission</class> -->
-		<class>com.jurin_n.domain.model.identity.user.User</class>
-		<class>com.jurin_n.domain.model.identity.user.Role</class>
+		<!-- <class>com.jurin_n.domain.model.identity.user.User</class> -->
+		<!-- <class>com.jurin_n.domain.model.identity.user.Role</class> -->
 		<properties>
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
 			<property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL_ddlGeneration.jdbc"/>

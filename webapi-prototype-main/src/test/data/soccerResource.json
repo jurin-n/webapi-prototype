@@ -1,0 +1,18 @@
+{
+  "id":"soccer-team-001"
+ ,"name":"グランパス８"
+ ,"members":[
+    {"name":"FW 一郎","role":"FW"}
+   ,{"name":"FW 二郎","role":"FW"}
+   ,{"name":"MF 一郎","role":"MF"}
+   ,{"name":"MF 二郎","role":"MF"}
+   ,{"name":"MF 三郎","role":"MF"}
+   ,{"name":"MF 修造","role":"MF"}
+   ,{"name":"MF たけし","role":"MF"}
+   ,{"name":"DF 一郎","role":"DF"}
+   ,{"name":"DF 二郎","role":"DF"}
+   ,{"name":"DF 三郎","role":"DF"}
+   ,{"name":"楢崎 三郎","role":"GK"}
+   ,{"name":"ストイコビッチ","role":"CT"}
+  ]
+}

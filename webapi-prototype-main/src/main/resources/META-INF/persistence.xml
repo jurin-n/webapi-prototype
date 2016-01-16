@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="jax-rs-1_0-prototype2">
+		<jta-data-source>jdbc/db1</jta-data-source>
+		<!-- <exclude-unlisted-classes>false</exclude-unlisted-classes> -->
+		<class>com.jurin_n.domain.model.practice.menu.PracticeMenuId</class>
+		<class>com.jurin_n.domain.model.practice.menu.PracticeMenu</class>
+		<class>com.jurin_n.domain.model.practice.plan.PracticePlanId</class>
+		<class>com.jurin_n.domain.model.practice.plan.PracticePlan</class>
+		<class>com.jurin_n.domain.model.practice.member.PracticeMemberId</class>
+		<class>com.jurin_n.domain.model.practice.member.PracticeMember</class>
+		<class>com.jurin_n.domain.model.practice.record.PracticeRecordId</class>
+		<class>com.jurin_n.domain.model.practice.record.PracticeRecord</class>
+		<class>com.jurin_n.domain.model.team.Member</class>
+		<class>com.jurin_n.domain.model.team.Team</class>
+		<class>com.jurin_n.domain.model.identity.user.UserId</class>
+		<class>com.jurin_n.domain.model.identity.role.Role</class>
+		<!-- <class>com.jurin_n.domain.model.identity.permission.Permission</class> -->
+		<class>com.jurin_n.domain.model.identity.user.User</class>
+
+		
+		<properties>
+			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+			<property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL_ddlGeneration.jdbc"/>
+			<property name="eclipselink.drop-ddl-jdbc-file-name" value="dropDDL_ddlGeneration.jdbc"/>
+			<property name="eclipselink.ddl-generation.output-mode" value="both"/>
+		</properties>
+	</persistence-unit>
+</persistence>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="jax-rs-1_0-prototype2-UnitTest" transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<!-- <exclude-unlisted-classes>false</exclude-unlisted-classes> -->
+		<class>com.jurin_n.domain.model.practice.menu.PracticeMenuId</class>
+		<class>com.jurin_n.domain.model.practice.menu.PracticeMenu</class>
+		<class>com.jurin_n.domain.model.practice.plan.PracticePlanId</class>
+		<class>com.jurin_n.domain.model.practice.plan.PracticePlan</class>
+		<class>com.jurin_n.domain.model.practice.member.PracticeMemberId</class>
+		<class>com.jurin_n.domain.model.practice.member.PracticeMember</class>
+		<class>com.jurin_n.domain.model.practice.record.PracticeRecordId</class>
+		<class>com.jurin_n.domain.model.practice.record.PracticeRecord</class>
+		<class>com.jurin_n.domain.model.team.Member</class>
+		<class>com.jurin_n.domain.model.team.Team</class>
+		<class>com.jurin_n.domain.model.identity.user.UserId</class>
+		<class>com.jurin_n.domain.model.identity.role.Role</class>
+		<!-- <class>com.jurin_n.domain.model.identity.permission.Permission</class> -->
+		<class>com.jurin_n.domain.model.identity.user.User</class>
+		<properties>
+			<!-- スキーマ生成関連プロパティ  -->
+			<!-- javax.persistence.schema-generation. 系はJavaEE7(JPA2.1)から使えるプロパティorz -->
+			<!-- 
+			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+			<property name="javax.persistence.schema-generation.database.action" value="create-or-extend-tables"/>
+			<property name="javax.persistence.schema-generation.create-source" value="metadata"/>
+			-->
+
+			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+			<!-- <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/> --> <!-- create-or-extend-tables don't work orz. -->
+			<!-- <property name="eclipselink.ddl-generation" value="create-tables"/> -->
+			
+			<!-- DDL生成関連プロパティ  -->
+			<property name="eclipselink.ddl-generation.output-mode" value="both"/>
+			<property name="eclipselink.create-ddl-jdbc-file-name" value="create.sql"/>
+			<property name="eclipselink.drop-ddl-jdbc-file-name" value="drop.sql"/>
+			<property name="eclipselink.application-location" value="./src/test/resources"/>
+				
+			<!-- ログ出力関連プロパティ  -->
+			<!-- <property name="eclipselink.logging.level" value="ALL"/> -->
+			
+			<!-- JDBC関連プロパティ  -->
+			<!--
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+			<property name="javax.persistence.jdbc.user" value=""/>
+			<property name="javax.persistence.jdbc.password" value=""/>
+			--> 
+			<!-- jdbc:postgresql://[hostname]:[port]/[databaseName] -->
+			<!--<property name="javax.persistence.jdbc.url" value=""/>-->
+
+			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+			<property name="javax.persistence.jdbc.user" value="APP"/>
+			<property name="javax.persistence.jdbc.password" value="APP"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/db1;create=true"/>
+		</properties>
+	</persistence-unit>
+</persistence>

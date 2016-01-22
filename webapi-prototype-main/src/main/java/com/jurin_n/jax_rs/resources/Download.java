@@ -9,18 +9,20 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
 
 @Path("/download")
 public class Download {
 	@GET
 	@Produces("application/zip")
-	public StreamingOutput get(){
-		return new StreamingOutput(){
+	public Response get(){
+		final File file = new File("xxx.zip");
+
+		StreamingOutput stream = new StreamingOutput(){
 			@Override
 			public void write(java.io.OutputStream os) throws IOException, WebApplicationException {
-				InputStream is= new FileInputStream(
-							new File("xxxx.zip"));
+				InputStream is= new FileInputStream(file);
 				byte[] buf = new byte[1000];
 				for (int nChunk = is.read(buf); nChunk!=-1; nChunk = is.read(buf))
 				{
@@ -29,5 +31,13 @@ public class Download {
 				is.close();
 			}
 		};
+		
+		return Response
+				.status(Response.Status.OK)
+				//.header("Transfer-Encoding", "chunked")
+				.header("Content-Length",file.length())
+				.header("Content-Disposition", "attachment; filename=\"test.zip\"")
+				.entity(stream)
+				.build(); 
 	}
 }

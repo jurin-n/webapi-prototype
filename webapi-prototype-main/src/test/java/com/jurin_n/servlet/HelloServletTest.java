@@ -10,14 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+
+import static org.hamcrest.CoreMatchers.is;
 
 import java.io.IOException;
 
 public class HelloServletTest {
 	private HelloServlet sut;
 	private HttpServletRequest request;
-	private ServletOutputStream output;
+	//private ServletOutputStream output;
+	private StringServletOutputStream output;
 	private HttpServletResponse response;
 
 	@Before
@@ -28,7 +33,8 @@ public class HelloServletTest {
 	@Before
 	public void createServletRequestAndResponseMock(){
 		request  = mock(HttpServletRequest.class);
-		output   = mock(ServletOutputStream.class);
+		//output   = mock(ServletOutputStream.class);
+		output   = new StringServletOutputStream();
 		response = mock(HttpServletResponse.class);		
 	}
 
@@ -39,7 +45,8 @@ public class HelloServletTest {
 		
 		sut.doGet(request, response);
 		
-		verify(output).println("Hello JUnit");
+		//verify(output).println("Hello JUnit");
+		assertThat(output.getOutput() ,is("Hello JUnit\r\n"));
 		verify(response).setContentType("text/plain; charset=UTF-8");
 		verify(response).flushBuffer();
 	}

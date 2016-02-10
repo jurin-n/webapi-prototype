@@ -14,6 +14,7 @@ import com.jurin_n.domain.model.practice.member.PracticeMemberRepository;
 import com.jurin_n.domain.model.practice.menu.PracticeMenu;
 import com.jurin_n.domain.model.practice.menu.PracticeMenuId;
 import com.jurin_n.domain.model.practice.menu.PracticeMenuRepository;
+import com.jurin_n.domain.model.practice.menu.PracticeMenuService;
 import com.jurin_n.domain.model.practice.plan.PracticePlan;
 import com.jurin_n.domain.model.practice.plan.PracticePlanId;
 import com.jurin_n.domain.model.practice.plan.PracticePlanRepository;
@@ -27,6 +28,7 @@ public class PracticeApplicationService {
 	@Inject PracticeMemberRepository memberRepo;
 	@Inject PracticeMenuRepository menuRepo;
 	@Inject PracticeRecordRepository recordRepo;
+	@Inject PracticeMenuService menuService;
 	//
 	// PracticePlan
 	//
@@ -113,7 +115,9 @@ public class PracticeApplicationService {
 		return aMember;
 	}
 	public void addPracticeMenu(PracticeMenu aMenu) {
-		menuRepo.add(aMenu);
+		//menuRepo.add(aMenu);
+		PracticeMenuId id = menuService.addPracticeMenu(aMenu.getMenu());
+		aMenu.setMemberId(id);
 	}
 	public void updatePracticeMenu(PracticeMenu aMenu) {
 		menuRepo.update(aMenu);

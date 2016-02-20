@@ -50,19 +50,26 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.4.0</version>
+				<executions>
+                  <execution>
+                    <!-- pre-integration-test で EmbeddedGlassFish起動すると ここでとまってしまうorz-->
+                    <!-- <phase>pre-integration-test</phase> -->
+                    <goals>
+                        <goal>exec</goal>
+                    </goals>
+                  </execution>
+				</executions>
 				<configuration>
-					<mainClass>EmbeddedGlassFish</mainClass>
-					<systemProperties>
-						<systemProperty>
-							<key>PORT</key>
-							<value>9080</value>
-						</systemProperty>
-						<systemProperty>
-							<key>DEBUG</key>
-							<value>yes</value>
-						</systemProperty>
-					</systemProperties>
-					<classpathScope>test</classpathScope>
+				  <executable>java</executable>
+				  <arguments>
+                    <argument>-DPORT=9080</argument>
+                    <argument>-DDEBUG=yes</argument>
+                    <argument>-Djava.library.path=${project.build.directory}/lib</argument>
+                    <argument>-classpath</argument>
+                    <classpath />
+                    <argument>EmbeddedGlassFish</argument>
+				  </arguments>
+				  <classpathScope>test</classpathScope>
 				</configuration>
 			</plugin>
 		</plugins>

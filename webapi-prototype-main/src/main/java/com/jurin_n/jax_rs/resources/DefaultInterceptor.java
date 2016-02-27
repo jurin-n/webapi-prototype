@@ -16,6 +16,7 @@ import com.jurin_n.domain.model.identity.Authentication;
 import com.jurin_n.domain.model.identity.AuthenticationFactory;
 import com.jurin_n.domain.model.identity.AuthenticationService;
 import com.jurin_n.domain.model.identity.Authentications;
+import com.jurin_n.domain.model.identity.permission.PermissionValue;
 import com.jurin_n.domain.model.identity.user.UserDescriptor;
 
 @DefaultProcess
@@ -47,13 +48,17 @@ public class DefaultInterceptor implements Serializable {
 			Object[] params = ic.getParameters();
 			HttpHeaders headers = getHttpHeaders(params);
 			
-			//前処理
-			beforeProcess(headers);
+			/* 前処理 */
+			//認証サービスを呼び出す
+			callAuthenticationService(headers);
 
-			//処理
+			//権限チェック
+			checkPermissions(ic.getMethod().getAnnotation(Permmisions.class).value());
+
+			/* 処理 */
 			Object o = ic.proceed();
 			
-			//後処理
+			/* 後処理 */
 			afterProcess();
 			
 			return o;
@@ -64,9 +69,9 @@ public class DefaultInterceptor implements Serializable {
 	private void afterProcess() {
 		// TODO Auto-generated method stub
 	}
-
-	private void beforeProcess(HttpHeaders headers) {
-		// TODO Auto-generated method stub		
+	
+	protected void callAuthenticationService(HttpHeaders headers) {
+		// TODO Auto-generated method stub
 		if(headers==null){
 			throw new WebApplicationException(Response.Status.UNAUTHORIZED);
 		}
@@ -83,7 +88,12 @@ public class DefaultInterceptor implements Serializable {
 
 		if(userDescriptor==null){
 			throw new WebApplicationException(Response.Status.UNAUTHORIZED);
-		}		
+		}
 	}
 
+	protected void checkPermissions(PermissionValue permission) {
+		if(userDescriptor.inPermission(permission)==false){
+			throw new WebApplicationException(Response.Status.FORBIDDEN);
+		}
+	}
 }

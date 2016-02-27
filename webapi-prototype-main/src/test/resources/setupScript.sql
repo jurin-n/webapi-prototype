@@ -18,3 +18,4 @@ insert into t_permissions(role_id,permissions) values('role102','readMember')
 
 #テストユーザセットアップ
 INSERT INTO T_USER (NAME, STATUS, ID ) values ('test user', 0,'user001')
+INSERT INTO T_USER_T_ROLE(ID,ROLES_ID)values ('user001','role101')

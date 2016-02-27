@@ -20,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.jurin_n.application.PracticeApplicationService;
+import com.jurin_n.domain.model.identity.permission.PermissionValue;
 import com.jurin_n.domain.model.practice.menu.PracticeMenu;
 import com.jurin_n.domain.model.practice.menu.PracticeMenuId;
 import com.jurin_n.jax_rs.providers.BaseJsonMarshaller;
@@ -90,6 +91,7 @@ public class PracticeMenuResource {
 	}
 	
 	@POST
+	@Permmisions(PermissionValue.writeMenu)
 	public Response addPracticeMenu(@Context HttpHeaders headers,PracticeMenuRepresentation aMenu){
 		//サービス
 		PracticeMenu Menu = new PracticeMenu(aMenu);

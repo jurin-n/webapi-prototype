@@ -13,7 +13,9 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -27,6 +29,7 @@ import com.jurin_n.jax_rs.representation.PracticeMenuRepresentation;
 @RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@DefaultProcess
 public class PracticeMenuResource {
 	@Inject
 	PracticeApplicationService ts;
@@ -87,7 +90,7 @@ public class PracticeMenuResource {
 	}
 	
 	@POST
-	public Response addPracticeMenu(PracticeMenuRepresentation aMenu){
+	public Response addPracticeMenu(@Context HttpHeaders headers,PracticeMenuRepresentation aMenu){
 		//サービス
 		PracticeMenu Menu = new PracticeMenu(aMenu);
 		ts.addPracticeMenu(Menu);

@@ -6,4 +6,7 @@
     <alternatives>
         <!-- <class>com.jurin_n.domain.model.identity.AuthenticationService</class> -->
     </alternatives>
+    <interceptors>
+    	<class>com.jurin_n.jax_rs.resources.DefaultInterceptor</class>
+    </interceptors>
 </beans>

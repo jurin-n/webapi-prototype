@@ -21,7 +21,7 @@ import com.jurin_n.domain.model.identity.user.UserDescriptor;
 
 @DefaultProcess
 @Interceptor
-public class DefaultInterceptor implements Serializable {
+public class DefaultInterceptor implements Serializable { //TODO 今回のケース(JAX-RSで使うケース)でSerializableインターフェイス必要か検証
 	
 	@Inject AuthenticationService authService;
 	UserDescriptor userDescriptor;

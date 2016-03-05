@@ -3,20 +3,16 @@ package com.jurin_n.jax_rs.resources;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.jurin_n.application.PracticeApplicationService;
@@ -27,11 +23,7 @@ import com.jurin_n.jax_rs.providers.BaseJsonMarshaller;
 import com.jurin_n.jax_rs.representation.PracticeMenuRepresentation;
 
 @Path("/practice/menu")
-@RequestScoped
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-@DefaultProcess
-public class PracticeMenuResource {
+public class PracticeMenuResource extends BaseResourceForInterceptor {
 	@Inject
 	PracticeApplicationService ts;
 	

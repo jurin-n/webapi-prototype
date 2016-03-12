@@ -9,6 +9,7 @@ import javax.interceptor.InvocationContext;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
+import com.jurin_n.domain.model.error.ErrorResponse;
 import com.jurin_n.domain.model.identity.Authentication;
 import com.jurin_n.domain.model.identity.AuthenticationFactory;
 import com.jurin_n.domain.model.identity.AuthenticationService;
@@ -62,12 +63,16 @@ public class DefaultInterceptor implements Serializable { //TODO 今回のケー
 		UserDescriptor userDescriptor = authService.execute(authLogic);
 		
 		if(userDescriptor == null){
-			throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+			//throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+			throw new ResourceException(
+					new ErrorResponse(Response.Status.UNAUTHORIZED, "0001", "認証エラー"));
 		}
 		
 		/* 認可 */
 		if(userDescriptor.inPermission(permission)==false){
-			throw new WebApplicationException(Response.Status.FORBIDDEN);
+			//throw new WebApplicationException(Response.Status.FORBIDDEN);
+			throw new ResourceException(
+					new ErrorResponse(Response.Status.FORBIDDEN, "0002", "認可エラー"));
 		}
 	}
 }

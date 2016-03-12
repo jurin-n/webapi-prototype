@@ -24,7 +24,7 @@ public class BaseResourceForInterceptor {
 
 	public Map<String, List<String>> getRequestHeaders() {
 		Map<String, List<String>> returnValue = new HashMap<>();
-		MultivaluedMap<String, String> multivaluedMap= headers.getRequestHeaders();
+		MultivaluedMap<String, String> multivaluedMap = headers.getRequestHeaders();
 		
 		for(String key : multivaluedMap.keySet()){
 			returnValue.put(key, multivaluedMap.get(key));

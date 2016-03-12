@@ -3,7 +3,6 @@ package com.jurin_n.jax_rs.resources;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
@@ -14,7 +13,7 @@ import javax.ws.rs.core.Response;
 import com.jurin_n.domain.model.identity.Authentication;
 import com.jurin_n.domain.model.identity.AuthenticationFactory;
 import com.jurin_n.domain.model.identity.AuthenticationService;
-import com.jurin_n.domain.model.identity.Authentications;
+import com.jurin_n.domain.model.identity.AuthenticationTypes;
 import com.jurin_n.domain.model.identity.permission.PermissionValue;
 import com.jurin_n.domain.model.identity.user.UserDescriptor;
 
@@ -23,7 +22,7 @@ class BaseResource {
 	@Inject private AuthenticationService authService;
 	//@EJB private AuthenticationService authService;
 	private UserDescriptor userDescriptor;
-	private Authentications selectedAuthentication = Authentications.Sha1Authentication;
+	private AuthenticationTypes selectedAuthentication = AuthenticationTypes.Sha1Authentication;
 	private Authentication authLogic;
 	
 	protected void callAuthenticationService() {
@@ -34,7 +33,7 @@ class BaseResource {
 		map.put("Date", "dummy"); //TODO Dateヘッダ取得ロジック追加
 
 		authLogic = AuthenticationFactory.newInstance(selectedAuthentication);
-		userDescriptor = authService.execute(authLogic,map);
+		userDescriptor = authService.execute(authLogic);
 
 		if(userDescriptor==null){
 			throw new WebApplicationException(Response.Status.UNAUTHORIZED);

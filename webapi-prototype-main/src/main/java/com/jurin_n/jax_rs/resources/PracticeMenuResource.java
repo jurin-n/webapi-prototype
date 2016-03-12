@@ -10,9 +10,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 
 import com.jurin_n.application.PracticeApplicationService;
@@ -84,7 +82,7 @@ public class PracticeMenuResource extends BaseResourceForInterceptor {
 	
 	@POST
 	@Permmisions(PermissionValue.writeMenu)
-	public Response addPracticeMenu(@Context HttpHeaders headers,PracticeMenuRepresentation aMenu){
+	public Response addPracticeMenu(PracticeMenuRepresentation aMenu){
 		//サービス
 		PracticeMenu Menu = new PracticeMenu(aMenu);
 		ts.addPracticeMenu(Menu);

@@ -1,5 +1,5 @@
 package com.jurin_n.domain.model.identity;
 
-public enum Authentications {
+public enum AuthenticationTypes {
 	Sha1Authentication,DefaultAuthentication
 }

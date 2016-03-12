@@ -2,7 +2,7 @@ package com.jurin_n.domain.model.identity;
 
 public class AuthenticationFactory {
 
-	public static Authentication newInstance(Authentications selectedAuthentication) {
+	public static Authentication newInstance(AuthenticationTypes selectedAuthentication) {
 		Authentication selected;
 		switch(selectedAuthentication){
 			case Sha1Authentication:

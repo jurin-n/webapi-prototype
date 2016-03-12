@@ -36,7 +36,7 @@ public class AuthenticationServiceTest {
 		//テスト対象セットアップ
 		sut = new AuthenticationService();
 		auth = AuthenticationFactory
-				.newInstance(Authentications.Sha1Authentication);
+				.newInstance(AuthenticationTypes.Sha1Authentication);
 
 		MockitoAnnotations.initMocks(this);
 		when(repo.getUserById(new UserId("user001"))).thenReturn(

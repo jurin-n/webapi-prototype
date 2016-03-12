@@ -1,21 +1,17 @@
 package com.jurin_n.jax_rs.resources;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import com.jurin_n.domain.model.identity.Authentication;
 import com.jurin_n.domain.model.identity.AuthenticationFactory;
 import com.jurin_n.domain.model.identity.AuthenticationService;
-import com.jurin_n.domain.model.identity.Authentications;
 import com.jurin_n.domain.model.identity.permission.PermissionValue;
 import com.jurin_n.domain.model.identity.user.UserDescriptor;
 
@@ -24,36 +20,17 @@ import com.jurin_n.domain.model.identity.user.UserDescriptor;
 public class DefaultInterceptor implements Serializable { //TODO 今回のケース(JAX-RSで使うケース)でSerializableインターフェイス必要か検証
 	
 	@Inject AuthenticationService authService;
-	UserDescriptor userDescriptor;
-	Authentications selectedAuthentication = Authentications.Sha1Authentication;
-	Authentication authLogic;
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	HttpHeaders getHttpHeaders(Object[] params){
-		for(int i=0 ; i< params.length ; i++){
-			if(params[i] instanceof HttpHeaders){
-				return (HttpHeaders) params[i];
-			}
-		}
-		return null;
-	}
-	
+
 	@AroundInvoke
 	public Object beforeAndAfterProcess(InvocationContext ic) throws Exception{
 		try {
-			Object[] params = ic.getParameters();
-			HttpHeaders headers = getHttpHeaders(params);
-			
 			/* 前処理 */
-			//認証サービスを呼び出す
-			callAuthenticationService(headers);
-
-			//権限チェック
-			checkPermissions(ic.getMethod().getAnnotation(Permmisions.class).value());
+			beforeProcess(ic);
 
 			/* 処理 */
 			Object o = ic.proceed();
@@ -70,28 +47,25 @@ public class DefaultInterceptor implements Serializable { //TODO 今回のケー
 		// TODO Auto-generated method stub
 	}
 	
-	protected void callAuthenticationService(HttpHeaders headers) {
-		// TODO Auto-generated method stub
-		if(headers==null){
+	protected void beforeProcess(InvocationContext ic) {
+		//RESTリソースのベースクラス取得
+		BaseResourceForInterceptor base = (BaseResourceForInterceptor)ic.getTarget();
+		//実行するメソッドより認可アノテーション取得
+		PermissionValue permission = ic.getMethod().getAnnotation(Permmisions.class).value();
+		
+		/* 認証 */
+		Authentication authLogic = AuthenticationFactory
+						.newInstance(base.getSelectedAuthenticationType());
+		
+		//TODO ミリ秒 900000L を設定ファイルから取得するように対応
+		authLogic.init(base.getRequestHeaders(),900000L);
+		UserDescriptor userDescriptor = authService.execute(authLogic);
+		
+		if(userDescriptor == null){
 			throw new WebApplicationException(Response.Status.UNAUTHORIZED);
 		}
 		
-		MultivaluedMap<String, String> multivaluedMap = headers.getRequestHeaders();
-		
-		HashMap<String,String> map = new HashMap<>();
-		map.put("Authorization", multivaluedMap.get("Authorization").get(0));
-		//map.put("Date", multivaluedMap.get("Date").get(0));
-		map.put("Date", "dummy"); //TODO Dateヘッダ取得ロジック追加
-		
-		authLogic = AuthenticationFactory.newInstance(selectedAuthentication);
-		userDescriptor = authService.execute(authLogic,map);
-
-		if(userDescriptor==null){
-			throw new WebApplicationException(Response.Status.UNAUTHORIZED);
-		}
-	}
-
-	protected void checkPermissions(PermissionValue permission) {
+		/* 認可 */
 		if(userDescriptor.inPermission(permission)==false){
 			throw new WebApplicationException(Response.Status.FORBIDDEN);
 		}

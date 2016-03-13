@@ -1,17 +1,15 @@
 package com.jurin_n.domain.model.identity;
 
 public class AuthenticationFactory {
-
-	public static Authentication newInstance(AuthenticationTypes selectedAuthentication) {
-		Authentication selected;
+	public static Authentication newInstance(
+					AuthenticationTypes selectedAuthentication) {
 		switch(selectedAuthentication){
 			case Sha1Authentication:
-				selected = new Sha1Authentication();
-				break;
+				return new Sha1Authentication();
+			case DefaultAuthentication:
+				return new Sha1Authentication();
 			default:
-				selected = null; //TODO デフォルトのAuthentication決まってない
-				break;
+				throw new IllegalStateException();
 		}
-		return selected;
 	}
 }

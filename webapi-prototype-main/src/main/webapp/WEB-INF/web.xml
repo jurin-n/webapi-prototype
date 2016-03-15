@@ -1,0 +1,17 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
+id="WebApp_ID" version="3.0">
+	<env-entry>
+		<env-entry-name>milliseconds</env-entry-name>
+		<env-entry-type>java.lang.Long</env-entry-type>
+		<env-entry-value>900000</env-entry-value>
+	</env-entry>
+	<env-entry>
+		<env-entry-name>baseUriForDownload</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>http://xxxx.com/aaa/bbb</env-entry-value>
+	</env-entry>
+</web-app>

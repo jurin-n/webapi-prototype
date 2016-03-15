@@ -3,6 +3,7 @@ package com.jurin_n.jax_rs.resources;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -24,6 +25,12 @@ import com.jurin_n.jax_rs.representation.PracticeMenuRepresentation;
 public class PracticeMenuResource extends BaseResourceForInterceptor {
 	@Inject
 	PracticeApplicationService ts;
+	
+	@Resource(name="milliseconds")
+	long milliseconds;
+	
+	@Resource(name="baseUriForDownload")
+	String baseUriForDownload;
 	
 	@GET
 	public Response getPracticeMenuList(){
@@ -83,6 +90,9 @@ public class PracticeMenuResource extends BaseResourceForInterceptor {
 	@POST
 	@Permmisions(PermissionValue.writeMenu)
 	public Response addPracticeMenu(PracticeMenuRepresentation aMenu){
+System.out.println("addPracticeMenu.baseUriForDownload=" + baseUriForDownload);
+System.out.println("addPracticeMenu.milliseconds=" + milliseconds);
+
 		//サービス
 		PracticeMenu Menu = new PracticeMenu(aMenu);
 		ts.addPracticeMenu(Menu);

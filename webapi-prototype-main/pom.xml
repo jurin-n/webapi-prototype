@@ -29,7 +29,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1.1</version>
 				<configuration>
-				  <failOnMissingWebXml>false</failOnMissingWebXml> <!-- web.xml が無くても mvn package 出来るように -->
+				  <!-- <failOnMissingWebXml>false</failOnMissingWebXml> --> <!-- web.xml が無くても mvn package 出来るように -->
 				  <packagingExcludes>WEB-INF/classes/*.class</packagingExcludes>
 				</configuration>
 			</plugin>

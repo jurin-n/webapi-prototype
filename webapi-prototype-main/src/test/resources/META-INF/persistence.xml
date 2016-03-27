@@ -38,7 +38,7 @@
 			<property name="eclipselink.application-location" value="./src/test/resources"/>
 				
 			<!-- ログ出力関連プロパティ  -->
-			<!-- <property name="eclipselink.logging.level" value="ALL"/> -->
+			<property name="eclipselink.logging.level" value="ALL"/>
 			
 			<!-- JDBC関連プロパティ  -->
 			<!--

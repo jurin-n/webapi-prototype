@@ -1,24 +1,26 @@
 <dataset>
   <init>
-  	delete from User where id = "xxx"
+  	delete from t_jpautil_test where column1 like 'user1%'
+  	delete from t_jpautil_test where column1 like 'user2%'
+  	delete from t_jpautil_test where column1 like 'user3%'
   </init>
   <setup>
-    <table name = "User">
+    <table name = "t_jpautil_test">
       <columns>
-      col1	col2
+      column1	column2	column3
       </columns>
       <data>
-      user1	テスト太郎
-      user2	テスト二郎
+      user1-1	テスト太郎		11
+      user1-2	テスト二郎		12
       </data>
   　 </table>
-     <table name = "Role">
+     <table name = "t_jpautil_test">
       <columns>
-      rolecol1	rolecol2
+      column1	column2	column3
       </columns>
       <data>
-      管理者	admin
-      メンバ	member
+      user2-1	テスト太郎		21
+      user2-2	テスト二郎		22
       </data>
   　 </table>
   </setup>

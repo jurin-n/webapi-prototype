@@ -8,7 +8,8 @@
       col1	col2
       </columns>
       <data>
-      data1	あああ
+      user1	テスト太郎
+      user2	テスト二郎
       </data>
   　 </table>
      <table name = "Role">
@@ -16,7 +17,8 @@
       rolecol1	rolecol2
       </columns>
       <data>
-      管理者	メンバ
+      管理者	admin
+      メンバ	member
       </data>
   　 </table>
   </setup>

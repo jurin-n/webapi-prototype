@@ -1,4 +1,4 @@
-package com.jurin_n.junit;
+package com.jurin_n.junit.dbutils;
 
 import static org.junit.Assert.*;
 

@@ -1,7 +1,6 @@
-package com.jurin_n.junit;
+package com.jurin_n.junit.dbutils;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -12,12 +11,12 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class JPADataSetUtil {
 	List<String> initSQLs = new ArrayList<>();
+	List<Table> tables = new ArrayList<>();
 
 	void setUpDataSetXML() throws SAXException, IOException, ParserConfigurationException {
 		InputStream is = new FileInputStream(System.getProperty("user.dir") + "/src/test/resources/jpa-dataset.xml");
@@ -34,12 +33,19 @@ public class JPADataSetUtil {
 			Element data = findChildByTag(table,"data");
 			
 			//TODO table名、カラム、データを格納する方法を検討。
-			System.out.println("table name = " + table.getAttribute("name") );
-			System.out.println("columns = " + columns.getTextContent().trim() );
-			System.out.println("data = " + data.getTextContent().trim() );
+			Table tableData = new Table(
+					 table.getAttribute("name")
+					,columns.getTextContent().trim()
+					,data.getTextContent().trim()
+					);
+			System.out.println("tableData.getName() = " + tableData.getName());
+			System.out.println("tableData.getColumns().toString()= " + tableData.getColumns().toString());
+			System.out.println("tableData.getRows().toString()= " + tableData.getRows().toString());
 		}
 	}
-
+	
+	//TODO JPAのnative Queryでデータセットする処理追加
+	
 	static Element findChildByTag(Element self, String name) {
 		return findChildrenByTag(self,name).get(0);
 	}

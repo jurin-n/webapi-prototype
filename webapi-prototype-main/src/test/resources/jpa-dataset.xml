@@ -1,0 +1,23 @@
+<dataset>
+  <init>
+  	delete from User where id = "xxx"
+  </init>
+  <setup>
+    <table name = "User">
+      <columns>
+      col1	col2
+      </columns>
+      <data>
+      data1	あああ
+      </data>
+  　 </table>
+     <table name = "Role">
+      <columns>
+      rolecol1	rolecol2
+      </columns>
+      <data>
+      管理者	メンバ
+      </data>
+  　 </table>
+  </setup>
+</dataset>

@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.jurin_n</groupId>
@@ -11,78 +12,78 @@
   <packaging>war</packaging>
   <name>webapi-prototype-main Maven Webapp</name>
   <url>http://maven.apache.org</url>
-	<dependencies>
-	  	<dependency>
-	    	<groupId>com.jurin_n</groupId>
-	    	<artifactId>webapi-prototype-common</artifactId>
-	    	<version>1.0</version>
-	  	</dependency>
-	</dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>com.jurin_n</groupId>
+      <artifactId>webapi-prototype-common</artifactId>
+      <version>1.0</version>
+    </dependency>
+  </dependencies>
   <properties>
     <excludedGroups>com.jurin_n.jax_rs.resources.RestAPITests</excludedGroups>
   </properties>
   <build>
     <finalName>webapi-prototype-main</finalName>
-		<plugins>
-		 	<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1.1</version>
-				<configuration>
-				  <!-- <failOnMissingWebXml>false</failOnMissingWebXml> --> <!-- web.xml が無くても mvn package 出来るように -->
-				  <packagingExcludes>WEB-INF/classes/*.class</packagingExcludes>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<includeScope>compile</includeScope>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-			  <groupId>org.apache.maven.plugins</groupId>
-			  <artifactId>maven-surefire-plugin</artifactId>
-			  <version>2.14</version>
-	            <configuration>
-			 	  <excludedGroups>${excludedGroups}</excludedGroups>
-	            </configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.4.0</version>
-				<executions>
-                  <execution>
-                    <!-- pre-integration-test で EmbeddedGlassFish起動すると ここでとまってしまうorz-->
-                    <!-- <phase>pre-integration-test</phase> -->
-                    <goals>
-                        <goal>exec</goal>
-                    </goals>
-                  </execution>
-				</executions>
-				<configuration>
-				  <executable>java</executable>
-				  <arguments>
-                    <argument>-DPORT=9080</argument>
-                    <argument>-DDEBUG=yes</argument>
-                    <argument>-Djava.library.path=${project.build.directory}/lib</argument>
-                    <argument>-classpath</argument>
-                    <classpath />
-                    <argument>EmbeddedGlassFish</argument>
-				  </arguments>
-				  <classpathScope>test</classpathScope>
-				</configuration>
-			</plugin>
-		</plugins>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.1.1</version>
+        <configuration>
+          <!-- <failOnMissingWebXml>false</failOnMissingWebXml> --> <!-- web.xml が無くても mvn package 出来るように -->
+          <packagingExcludes>WEB-INF/classes/*.class</packagingExcludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <includeScope>compile</includeScope>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.14</version>
+        <configuration>
+          <excludedGroups>${excludedGroups}</excludedGroups>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.4.0</version>
+        <executions>
+          <execution>
+            <!-- pre-integration-test で EmbeddedGlassFish起動すると ここでとまってしまうorz -->
+            <!-- <phase>pre-integration-test</phase> -->
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <executable>java</executable>
+          <arguments>
+            <argument>-DPORT=9080</argument>
+            <argument>-DDEBUG=yes</argument>
+            <argument>-Djava.library.path=${project.build.directory}/lib</argument>
+            <argument>-classpath</argument>
+            <classpath />
+            <argument>EmbeddedGlassFish</argument>
+          </arguments>
+          <classpathScope>test</classpathScope>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>

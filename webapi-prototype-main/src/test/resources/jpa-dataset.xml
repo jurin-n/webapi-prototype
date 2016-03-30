@@ -1,27 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <dataset>
-  <init>
-  	delete from t_jpautil_test where column1 like 'user1%'
-  	delete from t_jpautil_test where column1 like 'user2%'
-  	delete from t_jpautil_test where column1 like 'user3%'
-  </init>
+  <init><![CDATA[
+delete from t_jpautil_test where column1 like 'user1%'
+delete from t_jpautil_test where column1 like 'user2%'
+delete from t_jpautil_test where column1 like 'user3%'
+  ]]></init>
   <setup>
-    <table name = "t_jpautil_test">
-      <columns>
-      column1	column2	column3
-      </columns>
-      <data>
-      user1-1	テスト太郎		11
-      user1-2	テスト二郎		12
-      </data>
-  　 </table>
-     <table name = "t_jpautil_test">
-      <columns>
-      column1	column2	column3
-      </columns>
-      <data>
-      user2-1	テスト太郎		21
-      user2-2	テスト二郎		22
-      </data>
-  　 </table>
+    <table name="t_jpautil_test">
+      <columns><![CDATA[
+column1	column2	column3
+      ]]></columns>
+      <data><![CDATA[
+user1-1	テスト太郎		11
+user1-2	テスト二郎		12
+      ]]></data>
+    </table>
+    <table name="t_jpautil_test">
+      <columns><![CDATA[
+column1	column2	column3
+      ]]></columns>
+      <data><![CDATA[
+user2-1	テスト太郎		21
+user2-2	テスト二郎		22
+      ]]></data>
+    </table>
   </setup>
 </dataset>

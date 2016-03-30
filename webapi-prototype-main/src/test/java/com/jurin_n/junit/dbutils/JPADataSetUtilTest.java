@@ -1,7 +1,5 @@
 package com.jurin_n.junit.dbutils;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;

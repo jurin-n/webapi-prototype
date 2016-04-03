@@ -1,0 +1,6 @@
+!!com.jurin_n.domain.model.identity.user.UserYaml
+id: user12345
+name: テスト　太郎
+role: !!com.jurin_n.domain.model.identity.user.RoleYaml
+ id: role1234
+ name: admin

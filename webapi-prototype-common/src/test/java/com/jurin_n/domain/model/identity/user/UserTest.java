@@ -21,9 +21,10 @@ public class UserTest {
     private Set<Role> roles;
     private Role role;
     private Set<PermissionValue> permissions;
-
+    private User user;
+    
     @Before
-    public void createRole() {
+    public void setUpUser() {
         roles = new HashSet<>();
         permissions = new HashSet<>();
 
@@ -36,37 +37,28 @@ public class UserTest {
         role.setPermissions(permissions);
 
         roles.add(role);
+        
+        user = new User(new UserId(A_USER_ID_FOR_TEST),
+                A_USER_NAME_FOR_TEST, roles, Status.ACTIVE);
     }
 
     @Test
     public void inRoleメソッドの引数に渡したRoleがUserに含まれてる場合_inRoleメソッドはtrueを返す() {
-        User user = new User(new UserId(A_USER_ID_FOR_TEST),
-                A_USER_NAME_FOR_TEST, roles, Status.ACTIVE);
-
         assertTrue(user.inRole(RoleValue.ADMIN));
     }
 
     @Test
     public void inRoleメソッドの引数に渡したRoleがUserに含まれていない場合_inRoleメソッドはfalseを返す() {
-        User user = new User(new UserId(A_USER_ID_FOR_TEST),
-                A_USER_NAME_FOR_TEST, roles, Status.ACTIVE);
-
         assertFalse(user.inRole(RoleValue.MEMBER));
     }
 
     @Test
     public void inPermissionメソッドの引数に渡したPermissionがUserに含まれている場合_inPermissionメソッドはtrueを返す() {
-        User user = new User(new UserId(A_USER_ID_FOR_TEST),
-                A_USER_NAME_FOR_TEST, roles, Status.ACTIVE);
-
         assertTrue(user.inPermission(PermissionValue.writePlan));
     }
 
     @Test
     public void inPermissionメソッドの引数に渡したPermissionがUserに含まれていない場合_inPermissionメソッドはfalseを返す() {
-        User user = new User(new UserId(A_USER_ID_FOR_TEST),
-                A_USER_NAME_FOR_TEST, roles, Status.ACTIVE);
-
         assertFalse(user.inPermission(PermissionValue.writeMenu));
     }
 }

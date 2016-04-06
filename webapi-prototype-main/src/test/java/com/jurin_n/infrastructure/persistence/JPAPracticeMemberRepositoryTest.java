@@ -23,11 +23,14 @@ import com.jurin_n.jax_rs.representation.PracticeMemberRepresentation;
 import com.jurin_n.junit.rules.JPAResource;
 
 public class JPAPracticeMemberRepositoryTest {
-    private PracticeMemberRepository sut;
+    PracticeMemberRepository sut;
+    PracticeMemberBuilder practiceMemberBuilder;
+    String MEMBER_ID_FOR_TEST = "member001";
+    String MEMBER_ID_FOR_TEST2 = "member002";
+    String NAME_FOR_TEST = "テスト　太郎";
 
     @Rule
     public JPAResource jpa = new JPAResource();
-    PracticeMemberBuilder practiceMemberBuilder;
 
     @Before
     public void cleanDatabase() {
@@ -38,8 +41,8 @@ public class JPAPracticeMemberRepositoryTest {
     @Before
     public void setUpDefaultBuilder() {
         practiceMemberBuilder = PracticeMemberBuilder.anMember()
-                .withPracticeMemberId(new PracticeMemberId("member001"))
-                .withName("テスト　太郎");
+                .withPracticeMemberId(new PracticeMemberId(MEMBER_ID_FOR_TEST))
+                .withName(NAME_FOR_TEST);
     }
 
     @Before
@@ -55,10 +58,10 @@ public class JPAPracticeMemberRepositoryTest {
     @Test
     public void PracticeMemberのオブジェクトをaddメソッドに渡すとデータベースに追加できる() {
         PracticeMember addMember1 = practiceMemberBuilder
-                .withPracticeMemberId(new PracticeMemberId("member001"))
+                .withPracticeMemberId(new PracticeMemberId(MEMBER_ID_FOR_TEST))
                 .build();
         PracticeMember addMember2 = practiceMemberBuilder
-                .withPracticeMemberId(new PracticeMemberId("member002"))
+                .withPracticeMemberId(new PracticeMemberId(MEMBER_ID_FOR_TEST2))
                 .build();
 
         jpa.getEm().getTransaction().begin();
@@ -82,10 +85,10 @@ public class JPAPracticeMemberRepositoryTest {
     @Test(expected = RollbackException.class)
     public void 同一idのPracticeMemberのオブジェクトをaddメソッドに渡すとデータベースに追加できない() {
         PracticeMember addMember1 = practiceMemberBuilder
-                .withPracticeMemberId(new PracticeMemberId("member001"))
+                .withPracticeMemberId(new PracticeMemberId(MEMBER_ID_FOR_TEST))
                 .build();
         PracticeMember addMember2 = practiceMemberBuilder
-                .withPracticeMemberId(new PracticeMemberId("member001"))
+                .withPracticeMemberId(new PracticeMemberId(MEMBER_ID_FOR_TEST))
                 .build();
 
         jpa.getEm().getTransaction().begin();

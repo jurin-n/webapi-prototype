@@ -1,7 +1,8 @@
 package com.jurin_n.domain.model.identity.user;
 
+//import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
+import static org.hamcrest.Matchers.samePropertyValuesAs;
 import static org.junit.Assert.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -70,5 +71,13 @@ public class UserTest {
         User user = userBuilder.build();
 
         assertFalse(user.inPermission(PermissionValue.writeMenu));
+    }
+
+    @Test
+    public void マッチャー検証() {
+        User user = userBuilder.withName(null).build();
+        User user2 = userBuilder.build();
+        
+        assertThat(user, samePropertyValuesAs(user2));
     }
 }
